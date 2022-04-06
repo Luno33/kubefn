@@ -1,0 +1,34 @@
+{
+  "name": "blueprint",
+  "version": "1.0.0",
+  "description": "A blueprint for kubernetes-based microservices",
+  "main": "index.js",
+  "config": {
+    "port": "3002",
+    "imageregistry": "registry.gitlab.com/luno721/allstampsbackend",
+    "imagepullsecret": "docker-repo-credential"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "docker-login": "docker login registry.gitlab.com",
+    "docker-build": "docker build --build-arg exposed_port=$npm_package_config_port -f ./devops/Dockerfile -t $npm_package_config_imageregistry/allstamps-ms-$npm_package_name .",
+    "docker-tag": "docker tag $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:latest $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
+    "docker-run": "docker run --rm --name allstamps-ms-$npm_package_name -p $npm_package_config_port:$npm_package_config_port $npm_package_config_imageregistry/allstamps-ms-$npm_package_name",
+    "docker-push": "docker push $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
+    "docker-all": "npm run docker-login && npm run docker-build && npm run docker-tag && npm run docker-push",
+    "publish-patch": "npm version patch --force && npm run docker-all",
+    "publish-minor": "npm version minor --force && npm run docker-all",
+    "publish-major": "npm version major --force && npm run docker-all",
+    "create-kubectl-config": "node devops/create-kubectl.js",
+    "deploy-kubectl-config": "kubectl apply -f devops/kubectl-config.yaml",
+    "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version"
+  },
+  "author": "Marco Busacchi <mbusacchi@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security"
+  }
+}

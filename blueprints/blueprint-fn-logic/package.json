@@ -1,0 +1,11 @@
+{
+  "name": "blueprint-fn-logic",
+  "version": "1.0.1",
+  "description": "A blueprint for kubernetes-based functions",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+  },
+  "author": "Marco Busacchi <mbusacchi@gmail.com>",
+  "license": "ISC"
+}

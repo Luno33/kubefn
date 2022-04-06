@@ -1,0 +1,22 @@
+{
+  "name": "kubefn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "kubefn": "node src/index.js"
+  },
+  "bin": {
+    "kubefn": "src/index.js"
+  },
+  "author": "Marco Busacchi <mbusacchi@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "fs": "^0.0.1-security"
+  },
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "command-line-usage": "^6.1.2",
+    "shelljs": "^0.8.5"
+  }
+}
