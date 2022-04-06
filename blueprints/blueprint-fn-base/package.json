@@ -4,7 +4,7 @@
   "description": "A blueprint for kubernetes-based microservices",
   "main": "index.js",
   "config": {
-    "port": "3002",
+    "port": "3000",
     "imageregistry": "registry.gitlab.com/luno721/allstampsbackend",
     "imagepullsecret": "docker-repo-credential"
   },

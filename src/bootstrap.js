@@ -12,6 +12,7 @@ module.exports = (functionName) => {
   shell.mkdir('-p', `${currentDir}/${functionName}/src`)
   console.log(`Copy Kubernetes blueprint into '${functionName}/.kubefn'...`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-base`, `${currentDir}/${functionName}/.kubefn`)
+  shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/kubefn.config.js`, `${currentDir}/${functionName}/kubefn.config.js`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/.gitignore`, `${currentDir}/${functionName}/.gitignore`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/package.json`, `${currentDir}/${functionName}/package.json`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/index.js`, `${currentDir}/${functionName}/src/index.js`)

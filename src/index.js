@@ -14,17 +14,16 @@ yargs(hideBin(process.argv))
         describe: 'name of your function'
       })
   }, (argv) => {
-    console.info(`Init the project with name :${argv.name}`)
     boostrap(argv.name)
   })
   .command('compile', 'copy your ./src folder in the blueprint under ./.kubefn', (yargs) => {
     return yargs
-  }, (argv) => {
+  }, () => {
     compile()
   })
   .command('run', 'run locally your code in an expressjs server', (yargs) => {
     return yargs
-  }, (argv) => {
+  }, () => {
     run()
   })
   .demandCommand()
