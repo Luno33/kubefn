@@ -17,7 +17,7 @@ module.exports = () => {
     exit();
   }
 
-  console.log(`Compiling the function...`)
+  console.log(`Copying the function in the blueprint...`)
   shell.cp('-R', `${currentDir}/src`, `${currentDir}/.kubefn/blueprint-fn-base/`)
 
   console.log(`Load blueprint package.json...`)
