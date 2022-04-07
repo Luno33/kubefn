@@ -17,6 +17,6 @@ module.exports = (semverIncrement) => {
   packageJsonBlueprint.version = version
   fs.writeFileSync(`${currentDir}/.kubefn/blueprint-fn-base/package.json`, JSON.stringify(packageJsonBlueprint, null, 2))
 
-  console.log(`Building the function ${packageJsonBlueprint.name}:${packageJsonBlueprint.version}...`)
+  console.log(`Building the function ${chalk.green(packageJsonBlueprint.name)}:${chalk.green(packageJsonBlueprint.version)}...`)
   shell.exec(`npm --prefix ${currentDir}/.kubefn/blueprint-fn-base/ run docker-all`)
 }
