@@ -7,6 +7,7 @@ const compile = require('./compile')
 const run = require('./run')
 const build = require('./build')
 const deploy = require('./deploy')
+const destroy = require('./destroy')
 
 yargs(hideBin(process.argv))
   .usage('Usage: $0 <command> [options]')
@@ -61,6 +62,12 @@ yargs(hideBin(process.argv))
       return deploy()
     }
     console.log(`Please choose between 'patch', 'minor', 'major' or leave the field empty to deploy the last built version`)
+  })
+  .command('destroy', 'delete your function from kubernetes', (yargs) => {
+    return yargs
+  }, () => {
+    compile()
+    destroy()
   })
   .command('update', '...', (yargs) => {
     return yargs
