@@ -1,10 +1,12 @@
 const shell = require('shelljs');
+const chalk = require('chalk')
 const path = require('path');
 const fs = require('fs')
 
 const pathBlueprints = __dirname + '/../blueprints'
 
 module.exports = (functionName) => {
+  console.log(chalk.green('--- bootstrap ---'))
   console.log('Bootstrapping the project...')
   const currentDir = shell.pwd().stdout
   console.log(`Creating folder '${functionName}'...`)

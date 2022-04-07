@@ -1,8 +1,10 @@
 const shell = require('shelljs')
 const fs = require('fs')
+const chalk = require('chalk')
 const { exit } = require('process')
 
 module.exports = () => {
+  console.log(chalk.green('--- compile ---'))
   const currentDir = shell.pwd().stdout
 
   if (!shell.test('-f', `${currentDir}/.kubefn/blueprint-fn-base/package.json`)) {

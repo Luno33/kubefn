@@ -1,9 +1,11 @@
-const shell = require('shelljs');
 const compile = require('./compile')
+const shell = require('shelljs');
+const chalk = require('chalk')
 const fs = require('fs')
 
 module.exports = (semverIncrement) => {
   compile()
+  console.log(chalk.green('--- bootstrap ---'))
   const currentDir = shell.pwd().stdout
 
   console.log('Incrementing the version')
