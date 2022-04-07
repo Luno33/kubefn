@@ -1,17 +1,18 @@
 const shell = require('shelljs')
 const fs = require('fs')
+const { exit } = require('process')
 
 module.exports = () => {
   const currentDir = shell.pwd().stdout
 
   if (!shell.test('-f', `${currentDir}/.kubefn/blueprint-fn-base/package.json`)) {
     console.log('Cannot find the blueprint package.json. Are you in the root folder of your project?')
-    return;
+    exit();
   }
 
   if (!shell.test('-f', `${currentDir}/package.json`)) {
     console.log('Cannot find the package.json file. Are you in the root folder of your project?')
-    return;
+    exit();
   }
 
   console.log(`Compiling the function...`)
