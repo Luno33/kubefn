@@ -8,6 +8,7 @@ const run = require('./run')
 const build = require('./build')
 const deploy = require('./deploy')
 const destroy = require('./destroy')
+const update = require('./update')
 
 yargs(hideBin(process.argv))
   .usage('Usage: $0 <command> [options]')
@@ -63,16 +64,29 @@ yargs(hideBin(process.argv))
     }
     console.log(`Please choose between 'patch', 'minor', 'major' or leave the field empty to deploy the last built version`)
   })
+  .command('update [semver_increment]', 'build and update your code on your kubernetes cluster. If you do not specify the semver_increment parameter, you will deploy the last built version', (yargs) => {
+    return yargs
+      .positional('semver_increment', {
+        describe: `optional version increase of your code. Choose between 'patch', 'minor', 'major'. If none it will be deployed the last built version`,
+        type: 'string',
+        default: ''
+      })
+  }, (argv) => {
+    if (argv.semver_increment === '') {
+      return update()
+    }
+    if (['patch', 'minor', 'major'].includes(argv.semver_increment)) {
+      compile()
+      build(argv.semver_increment)
+      return update()
+    }
+    console.log(`Please choose between 'patch', 'minor', 'major' or leave the field empty to deploy the last built version`)
+  })
   .command('destroy', 'delete your function from kubernetes', (yargs) => {
     return yargs
   }, () => {
     compile()
     destroy()
-  })
-  .command('update', '...', (yargs) => {
-    return yargs
-  }, () => {
-    console.log('not implemented yet')
   })
   .command('rollback', '...', (yargs) => {
     return yargs
