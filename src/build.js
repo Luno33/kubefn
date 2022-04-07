@@ -4,8 +4,7 @@ const chalk = require('chalk')
 const fs = require('fs')
 
 module.exports = (semverIncrement) => {
-  compile()
-  console.log(chalk.green('--- bootstrap ---'))
+  console.log(chalk.green('--- build ---'))
   const currentDir = shell.pwd().stdout
 
   console.log('Incrementing the version')
