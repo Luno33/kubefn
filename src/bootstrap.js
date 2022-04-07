@@ -1,5 +1,6 @@
 const shell = require('shelljs');
 const path = require('path');
+const fs = require('fs')
 
 const pathBlueprints = __dirname + '/../blueprints'
 
@@ -15,5 +16,8 @@ module.exports = (functionName) => {
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/kubefn.config.js`, `${currentDir}/${functionName}/kubefn.config.js`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/.gitignore`, `${currentDir}/${functionName}/.gitignore`)
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/package.json`, `${currentDir}/${functionName}/package.json`)
+  const packageJsonBlueprint = require(`${pathBlueprints}/blueprint-fn-logic/package.json`)
+  packageJsonBlueprint.name = functionName
+  fs.writeFileSync(`${currentDir}/${functionName}/package.json`, JSON.stringify(packageJsonBlueprint, null, 2))
   shell.cp('-R', `${pathBlueprints}/blueprint-fn-logic/index.js`, `${currentDir}/${functionName}/src/index.js`)
 }
