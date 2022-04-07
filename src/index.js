@@ -9,6 +9,7 @@ const build = require('./build')
 const deploy = require('./deploy')
 const destroy = require('./destroy')
 const update = require('./update')
+const rollback = require('./rollback')
 
 yargs(hideBin(process.argv))
   .usage('Usage: $0 <command> [options]')
@@ -88,10 +89,17 @@ yargs(hideBin(process.argv))
     compile()
     destroy()
   })
-  .command('rollback', '...', (yargs) => {
+  .command('rollback <semver>', `rollback to a previous image version already present in your image registry. Ex: 1.2.3`, (yargs) => {
     return yargs
-  }, () => {
-    console.log('not implemented yet')
+      .positional('semver', {
+        describe: 'semver of the image you want to rollback to. Ex: 1.2.3',
+        type: 'string'
+      })
+  }, (argv) => {
+    if (/^[0-9]*\.[0-9]*\.[0-9]*$/.test(argv.semver)) {
+      return rollback(argv.semver)
+    }
+    console.log('This semver does not get validated against the regular expression \/^[0-9]*\\.[0-9]*\\.[0-9]*$\/')
   })
   .demandCommand()
   .parse()

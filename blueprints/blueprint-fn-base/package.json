@@ -22,7 +22,8 @@
     "create-kubectl-config": "node devops/create-kubectl.js",
     "deploy-kubectl-config": "kubectl apply -f devops/kubectl-config.yaml",
     "destroy-kubectl-config": "kubectl delete -f devops/kubectl-config.yaml",
-    "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version"
+    "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
+    "rollback": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$KUBEFN_SEMVER_ROLLBACK"
   },
   "author": "Marco Busacchi <mbusacchi@gmail.com>",
   "license": "ISC",
