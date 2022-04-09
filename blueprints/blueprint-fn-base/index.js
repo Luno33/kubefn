@@ -1,4 +1,6 @@
 const express = require('express')
+const handler = require('./src/index.js')
+
 const app = express()
 
 const appName = process.env.npm_package_name
@@ -18,11 +20,7 @@ app.get('/version', (req, res) => {
   })
 })
 
-app.get('/', (req, res) => {
-  const handler = require('./src/index.js')
-  console.log('handler', handler)
-  handler.handler(req, res)
-})
+app.use('/', handler)
 
 app.listen(appPort, () => {
   console.log(`${appName} service listening on port ${appPort}`)
