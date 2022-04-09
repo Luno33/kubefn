@@ -35,6 +35,26 @@ module.exports = () => {
     ...kubefnConfig.config
   }
 
+  if ('dependencies' in packageJson) {
+    console.log(`Adds dependencies to blueprint...`)
+    packageJsonBlueprint.dependencies = {
+      ...packageJsonBlueprint.dependencies,
+      ...packageJson.dependencies
+    }
+  } else {
+    console.log(`No dependencies to add`)
+  }
+
+  if ('devDependencies' in packageJson) {
+    console.log(`Adds devDependencies to blueprint...`)
+    packageJsonBlueprint.devDependencies = {
+      ...packageJsonBlueprint.devDependencies,
+      ...packageJson.devDependencies
+    }
+  } else {
+    console.log(`No devDependencies to add`)
+  }
+
   console.log(`Override project name...`)
   packageJsonBlueprint.name = packageJson.name
 
