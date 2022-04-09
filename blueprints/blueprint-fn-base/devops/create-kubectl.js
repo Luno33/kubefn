@@ -7,17 +7,18 @@ const appVersion = process.env.npm_package_version
 const appPort = process.env.npm_package_config_port
 const imageRegistry = process.env.npm_package_config_imageregistry
 const imagePullSecret = process.env.npm_package_config_imagepullsecret
+const replicas = process.env.npm_package_config_replicas
 
 const template = `
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms-${appName}-deployment
+  name: fn-${appName}-deployment
 spec:
   selector:
     matchLabels:
-      app: ms-${appName}
-  replicas: 2
+      app: fn-${appName}
+  replicas: ${replicas ? replicas : '2'}
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -27,11 +28,11 @@ spec:
   template:
     metadata:
       labels:
-        app: ms-${appName}
+        app: fn-${appName}
     spec:
       containers:
-        - name: ms-${appName}
-          image: ${imageRegistry}/allstamps-ms-${appName}:${appVersion}
+        - name: fn-${appName}
+          image: ${imageRegistry}/fn-${appName}:${appVersion}
           imagePullPolicy: Always
           ports:
             - containerPort: ${appPort}
@@ -50,10 +51,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: ms-${appName}-service
+  name: fn-${appName}-service
 spec:
   selector:
-    app: ms-${appName}
+    app: fn-${appName}
   ports:
     - port: ${appPort}
 `
