@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const chalk = require('chalk')
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const boostrap = require('./bootstrap')
@@ -11,8 +12,20 @@ const destroy = require('./destroy')
 const update = require('./update')
 const rollback = require('./rollback')
 
+const logo = chalk.blueBright(`
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+.                                                                       .
+.       _/    _/            _/                   _/_/_/_/  _/      _/   .
+.      _/  _/    _/    _/  _/_/_/      _/_/     _/        _/_/    _/    .
+.     _/_/      _/    _/  _/    _/  _/_/_/_/   _/_/_/    _/  _/  _/     .
+.    _/  _/    _/    _/  _/    _/  _/         _/        _/    _/_/      .
+.   _/    _/    _/_/_/  _/_/_/      _/_/_/   _/        _/      _/       .
+.                                                                       .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+`)
+
 yargs(hideBin(process.argv))
-  .usage('Usage: $0 <command> [options]')
+  .usage(`${logo}\n\nUsage: $0 <command> [options]`)
   .command('bootstrap <name>', 'create the function with name [name]', (yargs) => {
     return yargs
       .positional('name', {
