@@ -5,16 +5,18 @@
   "main": "index.js",
   "config": {
     "port": "3000",
-    "imageregistry": "registry.gitlab.com/luno721/allstampsbackend",
-    "imagepullsecret": "docker-repo-credential"
+    "imageregistry": "registry.gitlab.com",
+    "imageregistrypath": "registry.gitlab.com/luno721/allstampsbackend",
+    "imagepullsecret": "docker-repo-credential",
+    "replicas": "2"
   },
   "scripts": {
     "start": "node index.js",
-    "docker-login": "docker login registry.gitlab.com",
-    "docker-build": "docker build --build-arg exposed_port=$npm_package_config_port -f ./devops/Dockerfile -t $npm_package_config_imageregistry/allstamps-ms-$npm_package_name .",
-    "docker-tag": "docker tag $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:latest $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
-    "docker-run": "docker run --rm --name allstamps-ms-$npm_package_name -p $npm_package_config_port:$npm_package_config_port $npm_package_config_imageregistry/allstamps-ms-$npm_package_name",
-    "docker-push": "docker push $npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
+    "docker-login": "docker login $npm_package_config_imageregistry",
+    "docker-build": "docker build --build-arg exposed_port=$npm_package_config_port -f ./devops/Dockerfile -t $npm_package_config_imageregistrypath/fn-$npm_package_name .",
+    "docker-tag": "docker tag $npm_package_config_imageregistrypath/fn-$npm_package_name:latest $npm_package_config_imageregistrypath/fn-$npm_package_name:$npm_package_version",
+    "docker-run": "docker run --rm --name fn-$npm_package_name -p $npm_package_config_port:$npm_package_config_port $npm_package_config_imageregistrypath/fn-$npm_package_name",
+    "docker-push": "docker push $npm_package_config_imageregistrypath/fn-$npm_package_name:$npm_package_version",
     "docker-all": "npm run docker-login && npm run docker-build && npm run docker-tag && npm run docker-push",
     "publish-patch": "npm version patch --force && npm run docker-all",
     "publish-minor": "npm version minor --force && npm run docker-all",
@@ -22,8 +24,8 @@
     "create-kubectl-config": "node devops/create-kubectl.js",
     "deploy-kubectl-config": "kubectl apply -f devops/kubectl-config.yaml",
     "destroy-kubectl-config": "kubectl delete -f devops/kubectl-config.yaml",
-    "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$npm_package_version",
-    "rollback": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistry/allstamps-ms-$npm_package_name:$KUBEFN_SEMVER_ROLLBACK"
+    "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistrypath/fn-$npm_package_name:$npm_package_version",
+    "rollback": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistrypath/fn-$npm_package_name:$KUBEFN_SEMVER_ROLLBACK"
   },
   "author": "Marco Busacchi <mbusacchi@gmail.com>",
   "license": "ISC",
