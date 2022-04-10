@@ -5,7 +5,7 @@ const fs = require('fs')
 const appName = process.env.npm_package_name
 const appVersion = process.env.npm_package_version
 const appPort = process.env.npm_package_config_port
-const imageRegistry = process.env.npm_package_config_imageregistry
+const imageRegistryPath = process.env.npm_package_config_imageregistrypath
 const imagePullSecret = process.env.npm_package_config_imagepullsecret
 const replicas = process.env.npm_package_config_replicas
 
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: fn-${appName}
-          image: ${imageRegistry}/fn-${appName}:${appVersion}
+          image: ${imageRegistryPath}/fn-${appName}:${appVersion}
           imagePullPolicy: Always
           ports:
             - containerPort: ${appPort}
