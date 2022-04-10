@@ -75,14 +75,6 @@ You still need to configure your Kubernetes Ingress to redirect traffic to your 
 kubefn deploy [semver_increment] # semver_increment: patch, minor, major
 ```
 
-### Update your microservice
-
-Update an already-deployed kubefn function.
-
-```bash
-kubefn update [semver_increment] # semver_increment: patch, minor, major
-```
-
 ### Rollback your microservice
 
 Rollback to a previous version of your function
