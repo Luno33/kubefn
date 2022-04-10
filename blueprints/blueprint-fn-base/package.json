@@ -22,7 +22,7 @@
     "publish-minor": "npm version minor --force && npm run docker-all",
     "publish-major": "npm version major --force && npm run docker-all",
     "create-kubectl-config": "node devops/create-kubectl.js",
-    "deploy-kubectl-config": "kubectl apply -f devops/kubectl-config.yaml",
+    "deploy-kubectl-config": "kubectl apply -f devops/kubectl-config.yaml && kubectl rollout status deployment fn-$npm_package_name-deployment",
     "destroy-kubectl-config": "kubectl delete -f devops/kubectl-config.yaml",
     "update": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistrypath/fn-$npm_package_name:$npm_package_version",
     "rollback": "kubectl set image deployment ms-$npm_package_name-deployment ms-$npm_package_name=$npm_package_config_imageregistrypath/fn-$npm_package_name:$KUBEFN_SEMVER_ROLLBACK"
