@@ -9,9 +9,9 @@ Save time writing your Kubernetes microservices, coding only what truly matters.
 
 - An already installed and configured Kubernetes cluster
 - An already configured kubectl to contact the Kubernetes cluster
-- A docker image repository
-- A secret set in the Kubernetes cluster to access the docker image repository
-- An Ingress in Kubernetes to access your microservices
+- A docker image repository *(for now tested only with GitLab image repo)*
+- A secret set in the Kubernetes cluster to access the docker image repository *(for now it's mandatory)*
+- An Ingress in Kubernetes to access your microservices *(for now it's mandatory)*
 
 ## Quick Start
 
