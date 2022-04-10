@@ -9,9 +9,7 @@ module.exports = () => {
   shell.exec(`npm --prefix ${currentDir}/.kubefn/blueprint-fn-base/ run create-kubectl-config`)
   shell.exec(`npm --prefix ${currentDir}/.kubefn/blueprint-fn-base/ run deploy-kubectl-config`)
 
-  console.log(`\nDeployed Kubernetes configuration:`)
-  const kubernetesConfiguration = fs.readFileSync(`${currentDir}/.kubefn/blueprint-fn-base/devops/kubectl-config.yaml`, {encoding:'utf8', flag:'r'})
-  console.log(chalk.green(kubernetesConfiguration))
+  console.log(`\nDeployed Kubernetes configuration: ${chalk.green(`${currentDir}/.kubefn/blueprint-fn-base/devops/kubectl-config.yaml`)}`)
 
-  console.log(chalk.black.bgGreen('\n---> Remember to expose your function through your kubernetes ingress <---\n'))
+  console.log(chalk.green('\n ---> Remember to expose your function through your kubernetes ingress <--- \n'))
 }
