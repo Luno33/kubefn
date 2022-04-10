@@ -5,6 +5,8 @@
 
 Save time writing your Kubernetes microservices, coding only what truly matters.
 
+> This project is still in alpha, please be patient :)
+
 ## Prerequisites
 
 - An already installed and configured Kubernetes cluster
