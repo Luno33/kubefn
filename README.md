@@ -92,3 +92,9 @@ kubefn destroy
 ```
 
 Remember to fix your Kubernetes Ingress accordingly.
+
+### How it works
+
+<p align="center">
+  <img src="./assets/how-it-works.png">
+</p>
