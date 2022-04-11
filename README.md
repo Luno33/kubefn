@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/Kubefn.gif" height="128">
+  <img src="https://raw.githubusercontent.com/Luno33/kubefn/62243abc025132847843acd9a28ac594cda52528/assets/Kubefn.gif" height="128">
   <h1 align="center">KubeFN</h1>
 </p>
 
@@ -95,6 +95,4 @@ Remember to fix your Kubernetes Ingress accordingly.
 
 ### How it works
 
-<p align="center">
-  <img src="./assets/how-it-works.png">
-</p>
+![Schema](https://raw.githubusercontent.com/Luno33/kubefn/62243abc025132847843acd9a28ac594cda52528/assets/how-it-works.png)
