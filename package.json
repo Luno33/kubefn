@@ -1,7 +1,7 @@
 {
   "name": "kubefn",
   "version": "1.0.0",
-  "description": "",
+  "description": "Save time writing your Kubernetes microservices, coding only what truly matters.",
   "main": "src/index.js",
   "scripts": {
     "kubefn": "node src/index.js"
